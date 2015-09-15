@@ -24,6 +24,8 @@ import java.net.URL;
  * A placeholder fragment containing a simple view.
  */
 public class ForecastFragment extends Fragment {
+    private final String LOG_TAG = ForecastFragment.class.getSimpleName();
+    private ArrayAdapter<String> mForecastAdapter;
 
     public ForecastFragment(){
 
@@ -60,8 +62,6 @@ public class ForecastFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-         ArrayAdapter<String> mForecastAdapter;
-
         //list of forcasts
         String[] weekForecast ={
                 "Today-Sunny-88/63",
@@ -86,8 +86,8 @@ public class ForecastFragment extends Fragment {
                 );
 
         //get the reference to the ListView, and attach the adapter to the ListView
-        ListView forecastListview = (ListView) rootView.findViewById(R.id.listview_forecast);
-        forecastListview.setAdapter(mForecastAdapter);
+        ListView forecastListView = (ListView) rootView.findViewById(R.id.listview_forecast);
+        forecastListView.setAdapter(mForecastAdapter);
 
         //FetchWeatherTask.execute();
 
@@ -142,8 +142,11 @@ public class ForecastFragment extends Fragment {
                     return null;
                 }
                 forecastJsonStr = buffer.toString();
+
+                Log.v(LOG_TAG, "Forecast JSON String: " + forecastJsonStr);
+
             } catch (IOException e) {
-                Log.e("ForecastFragment", "Error ", e);
+                Log.e(LOG_TAG, "Error ", e);
                 // If the code didn't successfully get the weather data, there's no point in attemping
                 // to parse it.
                 return null;
@@ -155,7 +158,7 @@ public class ForecastFragment extends Fragment {
                     try {
                         reader.close();
                     } catch (final IOException e) {
-                        Log.e("ForecastFragment", "Error closing stream", e);
+                        Log.e(LOG_TAG, "Error closing stream", e);
                     }
                 }
             }

@@ -2,26 +2,13 @@ package com.example.android.sunshine.app;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 
 public class MainActivity extends ActionBarActivity {
+    private final String LOG_TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +20,13 @@ public class MainActivity extends ActionBarActivity {
                     .commit();
         }
 
+        /*
         ActionBar actionBar = getSupportActionBar();
        //actionBar.show();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setIcon(R.drawable.ic_launcher);
         actionBar.setDisplayUseLogoEnabled(true);
-
+        */
     }
 
     @Override
