@@ -26,6 +26,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -70,7 +73,7 @@ public class ForecastFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
         //list of forcasts
-        String[] weekForecast ={
+        String[] data ={
                 "Today-Sunny-88/63",
                 "Tomorrow-Foggy-70/46",
                 "Wed-Cloudy-72/63",
@@ -78,6 +81,8 @@ public class ForecastFragment extends Fragment {
                 "Fri-Foggy-70/46",
                 "Sat-Sunny-76/68"
         };
+
+        List<String> weekForecast = new ArrayList<String>(Arrays.asList(data));
 
         //adapter for displaying the forecast
         mForecastAdapter =
@@ -229,9 +234,18 @@ public class ForecastFragment extends Fragment {
             return null;
         }
 
+        @Override
+        protected void onPostExecute(String[] wkForecast) {
+
+            mForecastAdapter.clear();
+            for(String dayInfo: wkForecast){
+                mForecastAdapter.add(dayInfo);
+            }
+        }
+
         /* The date/time conversion code is going to be moved outside the asynctask later,
-       * so for convenience we're breaking it out into its own method now.
-       */
+               * so for convenience we're breaking it out into its own method now.
+               */
         private String getReadableDateString(long time){
             // Because the API returns a unix timestamp (measured in seconds),
             // it must be converted to milliseconds in order to be converted to valid date.
@@ -327,10 +341,5 @@ public class ForecastFragment extends Fragment {
             return resultStrs;
 
         }
-
-       /* @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-        }*/
     }
 }
