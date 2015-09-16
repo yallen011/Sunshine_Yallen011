@@ -1,5 +1,6 @@
 package com.example.android.sunshine.app;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -106,7 +107,11 @@ public class ForecastFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Toast.makeText(view.getContext(), parent.getAdapter().getItem(position).toString(), Toast.LENGTH_LONG).show();
+                //Display temp detail on screen for few seconds
+                //OLD: Toast.makeText(view.getContext(), parent.getAdapter().getItem(position).toString(), Toast.LENGTH_LONG).show();
+
+                Intent detailIntent = new Intent(view.getContext(), DetailActivity.class);
+                startActivity(detailIntent);
             }
         });
 
