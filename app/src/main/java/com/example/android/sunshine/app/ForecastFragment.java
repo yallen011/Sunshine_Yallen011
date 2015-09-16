@@ -12,8 +12,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -100,6 +102,13 @@ public class ForecastFragment extends Fragment {
         //get the reference to the ListView, and attach the adapter to the ListView
         ListView forecastListView = (ListView) rootView.findViewById(R.id.listview_forecast);
         forecastListView.setAdapter(mForecastAdapter);
+        forecastListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Toast.makeText(view.getContext(), parent.getAdapter().getItem(position).toString(), Toast.LENGTH_LONG).show();
+            }
+        });
 
         //FetchWeatherTask.execute();
 
@@ -237,10 +246,17 @@ public class ForecastFragment extends Fragment {
         @Override
         protected void onPostExecute(String[] wkForecast) {
 
-            mForecastAdapter.clear();
-            for(String dayInfo: wkForecast){
-                mForecastAdapter.add(dayInfo);
+            if (wkForecast != null) {
+
+                //clears current data in the list
+                mForecastAdapter.clear();
+
+                //populates formatted forecast into the list
+                for (String dayInfo : wkForecast) {
+                    mForecastAdapter.add(dayInfo);
+                }
             }
+
         }
 
         /* The date/time conversion code is going to be moved outside the asynctask later,
