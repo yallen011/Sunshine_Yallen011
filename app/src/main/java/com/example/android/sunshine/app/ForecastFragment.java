@@ -107,10 +107,14 @@ public class ForecastFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                String forecast = mForecastAdapter.getItem(position);
+                Log.i(LOG_TAG, "Forecast in list at position " + position+": " + forecast);
                 //Display temp detail on screen for few seconds
-                //OLD: Toast.makeText(view.getContext(), parent.getAdapter().getItem(position).toString(), Toast.LENGTH_LONG).show();
+                //OLD: Toast.makeText(view.getContext(), forecast, Toast.LENGTH_LONG).show();
 
-                Intent detailIntent = new Intent(view.getContext(), DetailActivity.class);
+
+                Intent detailIntent = new Intent(getActivity(), DetailActivity.class)
+                        .putExtra(Intent.EXTRA_TEXT, forecast);
                 startActivity(detailIntent);
             }
         });

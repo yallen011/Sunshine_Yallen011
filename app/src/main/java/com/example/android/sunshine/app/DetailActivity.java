@@ -1,15 +1,20 @@
 package com.example.android.sunshine.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class DetailActivity extends ActionBarActivity {
+    private final static String LOG_TAG = DetailActivity.class.getSimpleName();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +63,14 @@ public class DetailActivity extends ActionBarActivity {
                                  Bundle savedInstanceState) {
 
             View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
+            //the detail Activity called via intent. Inspect the intent
+            Intent intent = getActivity().getIntent();
+            if(intent != null && intent.hasExtra(Intent.EXTRA_TEXT)) {
+                String message = intent.getStringExtra(Intent.EXTRA_TEXT);
+                Log.i(LOG_TAG,"Forecast data sent from forecast list: "+ message);
+                //Display forecast details as text
+                ((TextView) rootView.findViewById(R.id.detailsTextView)).setText(message);
+            }
             return rootView;
         }
     }
