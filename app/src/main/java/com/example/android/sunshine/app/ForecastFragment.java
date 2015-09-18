@@ -1,9 +1,11 @@
 package com.example.android.sunshine.app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.format.Time;
 import android.util.Log;
@@ -62,30 +64,39 @@ public class ForecastFragment extends Fragment {
         int id=item.getItemId();
 
         if(id ==R.id.action_refresh) {
-            FetchWeatherTask weatherTask = new FetchWeatherTask();
-            weatherTask.execute("94043");
+            updateWeather();
             return true;
 
         }
         return super.onOptionsItemSelected(item);
     }
 
+    private void updateWeather() {
+        FetchWeatherTask weatherTask = new FetchWeatherTask();
+
+        //get the location and units settings
+        SharedPreferences preferences = PreferenceManager
+                .getDefaultSharedPreferences(getActivity());
+        String location = preferences.getString(getString(R.string.pref_location_key),
+                getString(R.string.pref_location_default_value));
+        String units = preferences.getString(getString(R.string.pref_units_key),
+                getString(R.string.pref_units_default_value));
+
+        //send the location and units user preferences to be used to fetch the forecast
+        weatherTask.execute(location, units);
+    }
+
+    //update to the latest forecast setting when fragment starts
+    @Override
+    public void onStart(){
+        super.onStart();
+        updateWeather();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-
-        //list of forcasts
-        String[] data ={
-                "Today-Sunny-88/63",
-                "Tomorrow-Foggy-70/46",
-                "Wed-Cloudy-72/63",
-                "Thurs-Rainy-64/51",
-                "Fri-Foggy-70/46",
-                "Sat-Sunny-76/68"
-        };
-
-        List<String> weekForecast = new ArrayList<String>(Arrays.asList(data));
 
         //adapter for displaying the forecast
         mForecastAdapter =
@@ -96,8 +107,7 @@ public class ForecastFragment extends Fragment {
                         R.layout.list_item_forcast,
                         //ID of the textview to populate
                         R.id.list_item_forcast_textview,
-                        //forecast data
-                        weekForecast
+                        new ArrayList<String>()
                 );
 
         //get the reference to the ListView, and attach the adapter to the ListView
@@ -132,7 +142,7 @@ public class ForecastFragment extends Fragment {
         protected String[] doInBackground(String... params) {
 
             if(params.length == 0){
-                Log.e(LOG_TAG, "There are no zipcodes");
+                Log.e(LOG_TAG, "No data passed");
                 return null;
             }
 
@@ -145,7 +155,7 @@ public class ForecastFragment extends Fragment {
             String forecastJsonStr = null;
 
             String format = "json";
-            String units = "metric";
+            String units = params[1];
             int numDays = 7;
 
             try {
