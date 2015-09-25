@@ -14,6 +14,8 @@
     <string name="pref_units_key">units</string>
     <!--list titles for the units list values-->
     <string name="pref_units_default_value">imperial</string>
+    <string name="pref_units_metric">metric</string>
+    <string name="pref_units_imperial">imperial</string>
     <string-array name="pref_units_titles">
         <item>Metric</item>
         <item>Imperial</item>
@@ -22,4 +24,5 @@
         <item>metric</item>
         <item>imperial</item>
     </string-array>
+
 </resources>
