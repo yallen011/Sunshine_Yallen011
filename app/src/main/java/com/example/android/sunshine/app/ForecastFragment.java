@@ -180,7 +180,7 @@ public class ForecastFragment extends Fragment {
             //Changed the default type to imperial; imperial is commonly used in th U.S.
             String units = "imperial";
             int numDays = 7;
-            String api_key = "xxxxxxxxxxxxxxxx";
+            String api_key = "c14c7c6fcabc99767ed2b7b37f6fe675";
 
             try {
 
