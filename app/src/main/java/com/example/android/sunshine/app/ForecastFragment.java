@@ -180,6 +180,7 @@ public class ForecastFragment extends Fragment {
             //Changed the default type to imperial; imperial is commonly used in th U.S.
             String units = "imperial";
             int numDays = 7;
+            String api_key = "xxxxxxxxxxxxxxxx";
 
             try {
 
@@ -191,6 +192,7 @@ public class ForecastFragment extends Fragment {
                 final String FORMAT_PARAM = "mode";
                 final String UNITS_PARAM = "units";
                 final String DAYS_PARAM = "cnt";
+                final String API_KEY = "APPID";
 
                 Uri builtUri = Uri.parse(FORECAST_BASE_URL)
                         .buildUpon()
@@ -198,6 +200,7 @@ public class ForecastFragment extends Fragment {
                         .appendQueryParameter(FORMAT_PARAM, format)
                         .appendQueryParameter(UNITS_PARAM, units)
                         .appendQueryParameter(DAYS_PARAM, Integer.toString(numDays))
+                        .appendQueryParameter(API_KEY, api_key)
                         .build();
 
                 //below is an optional way found on stackoverflow for how to create a uri builder
@@ -256,7 +259,7 @@ public class ForecastFragment extends Fragment {
 
 
             } catch (IOException e) {
-                Log.e(LOG_TAG, "Error ", e);
+                Log.e(LOG_TAG, "HTTP Error " + e.getMessage(), e);
                 // If the code didn't successfully get the weather data, there's no point in attemping
                 // to parse it.
                 return null;

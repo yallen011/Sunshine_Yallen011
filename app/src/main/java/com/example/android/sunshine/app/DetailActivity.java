@@ -123,7 +123,7 @@ public class DetailActivity extends ActionBarActivity {
 
             //data to send in the intent, which is the forecast string plus the hashtag
             shareIntent.putExtra(Intent.EXTRA_TEXT,
-                    mForecastStr + FORECAST_SHARE_HASHTAG);
+                    mForecastStr +" " + FORECAST_SHARE_HASHTAG);
 
             return shareIntent;
         }
