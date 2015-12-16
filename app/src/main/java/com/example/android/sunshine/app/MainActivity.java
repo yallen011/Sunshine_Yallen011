@@ -16,9 +16,18 @@
 package com.example.android.sunshine.app;
 
 import android.content.Intent;
+<<<<<<< HEAD
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+=======
+import android.content.SharedPreferences;
+import android.net.Uri;
+import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.util.Log;
+>>>>>>> 1.01_hello_world
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -26,11 +35,16 @@ import com.example.android.sunshine.app.sync.SunshineSyncAdapter;
 
 public class MainActivity extends ActionBarActivity implements ForecastFragment.Callback {
 
+<<<<<<< HEAD
     private final String LOG_TAG = MainActivity.class.getSimpleName();
     private static final String DETAILFRAGMENT_TAG = "DFTAG";
 
     private boolean mTwoPane;
     private String mLocation;
+=======
+public class MainActivity extends ActionBarActivity {
+    private final String LOG_TAG = MainActivity.class.getSimpleName();
+>>>>>>> 1.01_hello_world
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +52,7 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
         mLocation = Utility.getPreferredLocation(this);
 
         setContentView(R.layout.activity_main);
+<<<<<<< HEAD
         if (findViewById(R.id.weather_detail_container) != null) {
             // The detail container view will be present only in the large-screen layouts
             // (res/layout-sw600dp). If this view is present, then the activity should be
@@ -61,6 +76,21 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
         forecastFragment.setUseTodayLayout(!mTwoPane);
 
         SunshineSyncAdapter.initializeSyncAdapter(this);
+=======
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.container, new ForecastFragment())
+                    .commit();
+        }
+
+        /*
+        ActionBar actionBar = getSupportActionBar();
+       //actionBar.show();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setIcon(R.drawable.ic_launcher);
+        actionBar.setDisplayUseLogoEnabled(true);
+        */
+>>>>>>> 1.01_hello_world
     }
 
     @Override
@@ -80,12 +110,22 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
+<<<<<<< HEAD
+=======
+            return true;
+        }
+
+        //option to view default location on a map
+        if(id == R.id.action_map){
+            openPreferredLocationInMap();
+>>>>>>> 1.01_hello_world
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+<<<<<<< HEAD
     @Override
     protected void onResume() {
         super.onResume();
@@ -123,6 +163,30 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
             Intent intent = new Intent(this, DetailActivity.class)
                     .setData(contentUri);
             startActivity(intent);
+=======
+    private void openPreferredLocationInMap(){
+
+        SharedPreferences preferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        String location = preferences.getString(getString(R.string.pref_location_key),
+                getString(R.string.pref_location_default_value));
+
+        String locationUri = "geo:0,0?";
+        Uri intentUri = Uri.parse(locationUri)
+                .buildUpon()
+                .appendQueryParameter("q",location)
+                .build();
+
+        Intent locationIntent = new Intent(Intent.ACTION_VIEW);
+        locationIntent.setData(intentUri);
+
+        //only execute the activity if it resolves successfull; if there is an activity to handle the intent
+        if(locationIntent.resolveActivity(getPackageManager()) !=null){
+            startActivity(locationIntent);
+        }else{
+            Log.i(LOG_TAG, "Couldn't call "+ location +", no receiving apps installed");
+>>>>>>> 1.01_hello_world
         }
+
     }
 }

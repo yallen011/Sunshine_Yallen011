@@ -5,6 +5,7 @@
     <!-- This permission is necessary in order for Sunshine to perform network access. -->
     <uses-permission android:name="android.permission.INTERNET" />
 
+<<<<<<< HEAD
     <!-- Permissions required by the sync adapter -->
     <uses-permission
         android:name="android.permission.READ_SYNC_SETTINGS"/>
@@ -13,6 +14,8 @@
     <uses-permission
         android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
 
+=======
+>>>>>>> 1.01_hello_world
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -39,12 +42,19 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
+<<<<<<< HEAD
             android:parentActivityName=".MainActivity"
             android:theme="@style/SettingsTheme">
+=======
+            android:parentActivityName=".MainActivity" >
+            <!--This will return the settings activity back to the main activity when
+            the up button is pressed-->
+>>>>>>> 1.01_hello_world
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.sunshine.app.MainActivity" />
         </activity>
+<<<<<<< HEAD
         <provider
             android:authorities="@string/content_authority"
             android:name=".data.WeatherProvider"
@@ -73,6 +83,8 @@
                 android:name="android.content.SyncAdapter"
                 android:resource="@xml/syncadapter" />
         </service>
+=======
+>>>>>>> 1.01_hello_world
     </application>
 
 </manifest>

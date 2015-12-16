@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
  * Copyright (C) 2014 The Android Open Source Project
  *
@@ -18,6 +19,10 @@ package com.example.android.sunshine.app;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
+=======
+package com.example.android.sunshine.app;
+
+>>>>>>> 1.01_hello_world
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -39,10 +44,18 @@ public class SettingsActivity extends PreferenceActivity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Add 'general' preferences, defined in the XML file
+<<<<<<< HEAD
+=======
+        // TODO: Add preferences from XML
+>>>>>>> 1.01_hello_world
         addPreferencesFromResource(R.xml.pref_general);
 
         // For all preferences, attach an OnPreferenceChangeListener so the UI summary can be
         // updated when the preference changes.
+<<<<<<< HEAD
+=======
+        // TODO: Add preferences
+>>>>>>> 1.01_hello_world
         bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_location_key)));
         bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_units_key)));
     }
@@ -82,10 +95,13 @@ public class SettingsActivity extends PreferenceActivity
         }
         return true;
     }
+<<<<<<< HEAD
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public Intent getParentActivityIntent() {
         return super.getParentActivityIntent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     }
+=======
+>>>>>>> 1.01_hello_world
 }

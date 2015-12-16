@@ -20,6 +20,10 @@ import android.test.suitebuilder.TestSuiteBuilder;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+<<<<<<< HEAD
+=======
+/* this class runs all test classes in its package*/
+>>>>>>> 1.01_hello_world
 public class FullTestSuite extends TestSuite {
     public static Test suite() {
         return new TestSuiteBuilder(FullTestSuite.class)
