@@ -30,17 +30,15 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
     // If you change the database schema, you must increment the database version.
     private static final int DATABASE_VERSION = 2;
 
-<<<<<<< HEAD
-=======
+
     //name of the actual database and the database file
->>>>>>> 1.01_hello_world
     static final String DATABASE_NAME = "weather.db";
 
     public WeatherDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-<<<<<<< HEAD
+    //this handler is called the first time the database is used.
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         // Create a table to hold locations.  A location consists of the string supplied in the
@@ -53,11 +51,6 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
                 LocationEntry.COLUMN_COORD_LONG + " REAL NOT NULL " +
                 " );";
 
-=======
-    //this handler is called the first time the database is used.
-    @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
->>>>>>> 1.01_hello_world
         final String SQL_CREATE_WEATHER_TABLE = "CREATE TABLE " + WeatherEntry.TABLE_NAME + " (" +
                 // Why AutoIncrement here, and not above?
                 // Unique keys will be auto-generated in either case.  But for weather
@@ -67,10 +60,7 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
                 WeatherEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
 
                 // the ID of the location entry associated with this weather data
-<<<<<<< HEAD
-=======
                 //NOT NULL prevents null values in the columns
->>>>>>> 1.01_hello_world
                 WeatherEntry.COLUMN_LOC_KEY + " INTEGER NOT NULL, " +
                 WeatherEntry.COLUMN_DATE + " INTEGER NOT NULL, " +
                 WeatherEntry.COLUMN_SHORT_DESC + " TEXT NOT NULL, " +
@@ -85,12 +75,9 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
                 WeatherEntry.COLUMN_DEGREES + " REAL NOT NULL, " +
 
                 // Set up the location column as a foreign key to location table.
-<<<<<<< HEAD
-=======
                 //this statement prevents weather entries from being inserted until the location
                 //entry for the weather location has been created, and you can delete locations
                 //while there exist weather locations that point to them.
->>>>>>> 1.01_hello_world
                 " FOREIGN KEY (" + WeatherEntry.COLUMN_LOC_KEY + ") REFERENCES " +
                 LocationEntry.TABLE_NAME + " (" + LocationEntry._ID + "), " +
 
@@ -99,24 +86,8 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
                 " UNIQUE (" + WeatherEntry.COLUMN_DATE + ", " +
                 WeatherEntry.COLUMN_LOC_KEY + ") ON CONFLICT REPLACE);";
 
-<<<<<<< HEAD
         sqLiteDatabase.execSQL(SQL_CREATE_LOCATION_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_WEATHER_TABLE);
-=======
-
-        sqLiteDatabase.execSQL(SQL_CREATE_WEATHER_TABLE);
-
-        final String SQL_CREATE_LOCATION_TABLE = "CREATE TABLE " + LocationEntry.TABLE_NAME  + " (" +
-                LocationEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                LocationEntry.COLUMN_CITY_NAME + " TEXT NOT NULL, " +
-                LocationEntry.COLUMN_LOCATION_SETTING + " TEXT UNIQUE NOT NULL, " +
-                LocationEntry.COLUMN_COORD_LAT + " REAL NOT NULL, " +
-                LocationEntry.COLUMN_COORD_LONG + " REAL NOT NULL " +
-                " );";
-
-        sqLiteDatabase.execSQL(SQL_CREATE_LOCATION_TABLE);
-
->>>>>>> 1.01_hello_world
     }
 
     @Override

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /*
  * Copyright (C) 2014 The Android Open Source Project
  *
@@ -14,23 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-=======
->>>>>>> 1.01_hello_world
+
 package com.example.android.sunshine.app;
 
 import android.content.Intent;
 import android.os.Bundle;
-<<<<<<< HEAD
-import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
-
-
-public class DetailActivity extends ActionBarActivity {
-=======
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -38,18 +29,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v7.widget.ShareActionProvider;
 import android.widget.TextView;
+
 
 public class DetailActivity extends ActionBarActivity {
     private final static String LOG_TAG = DetailActivity.class.getSimpleName();
->>>>>>> 1.01_hello_world
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-<<<<<<< HEAD
+
 
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
@@ -62,30 +52,18 @@ public class DetailActivity extends ActionBarActivity {
             fragment.setArguments(arguments);
 
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.weather_detail_container, fragment)
-=======
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.weather_detail_container, fragment);
+
+           /* getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new DetailFragment())
->>>>>>> 1.01_hello_world
-                    .commit();
+                    .commit();*/
         }
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 1.01_hello_world
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.detail, menu);
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> 1.01_hello_world
         return true;
     }
 
@@ -95,19 +73,13 @@ public class DetailActivity extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-<<<<<<< HEAD
-=======
 
         //noinspection SimplifiableIfStatement
->>>>>>> 1.01_hello_world
+
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
             return true;
         }
-<<<<<<< HEAD
-        return super.onOptionsItemSelected(item);
-    }
-=======
 
         return super.onOptionsItemSelected(item);
     }
@@ -185,5 +157,4 @@ public class DetailActivity extends ActionBarActivity {
         }
 
     }
->>>>>>> 1.01_hello_world
 }
