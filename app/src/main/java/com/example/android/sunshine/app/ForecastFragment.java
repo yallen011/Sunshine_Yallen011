@@ -126,7 +126,7 @@ public class ForecastFragment extends Fragment {
                         //the current context (this fragment's parent activity)
                         getActivity(),
                         //ID of list item layout
-                        R.layout.list_item_forcast,
+                        R.layout.list_item_forecast,
                         //ID of the textview to populate
                         R.id.list_item_forcast_textview,
                         new ArrayList<String>()
