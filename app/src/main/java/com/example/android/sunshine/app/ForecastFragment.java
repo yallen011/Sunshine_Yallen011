@@ -68,8 +68,29 @@ public class ForecastFragment extends Fragment {
             return true;
 
         }
+
+        //code below moved to MainActivity
+       /* if(id == R.id.action_map){
+            showMap();
+        }*/
         return super.onOptionsItemSelected(item);
     }
+
+    //code below moved to MainActivity
+    /*private void showMap() {
+        SharedPreferences preferences = PreferenceManager
+                .getDefaultSharedPreferences(getActivity());
+        String location = preferences.getString(getString(R.string.pref_location_key),
+                getString(R.string.pref_location_default_value));
+
+        String locationUri = "geo:0,0?q=";
+        Uri intentUri = Uri.parse(locationUri+location);
+        Intent locationIntent = new Intent(Intent.ACTION_VIEW, intentUri);
+        if(locationIntent.resolveActivity(getActivity().getPackageManager()) !=null){
+            startActivity(locationIntent);
+        }
+
+    }*/
 
     private void updateWeather() {
         FetchWeatherTask weatherTask = new FetchWeatherTask();
@@ -105,7 +126,7 @@ public class ForecastFragment extends Fragment {
                         //the current context (this fragment's parent activity)
                         getActivity(),
                         //ID of list item layout
-                        R.layout.list_item_forcast,
+                        R.layout.list_item_forecast,
                         //ID of the textview to populate
                         R.id.list_item_forcast_textview,
                         new ArrayList<String>()
@@ -159,6 +180,7 @@ public class ForecastFragment extends Fragment {
             //Changed the default type to imperial; imperial is commonly used in th U.S.
             String units = "imperial";
             int numDays = 7;
+            String api_key = "c14c7c6fcabc99767ed2b7b37f6fe675";
 
             try {
 
@@ -170,6 +192,7 @@ public class ForecastFragment extends Fragment {
                 final String FORMAT_PARAM = "mode";
                 final String UNITS_PARAM = "units";
                 final String DAYS_PARAM = "cnt";
+                final String API_KEY = api_key;
 
                 Uri builtUri = Uri.parse(FORECAST_BASE_URL)
                         .buildUpon()
@@ -177,6 +200,7 @@ public class ForecastFragment extends Fragment {
                         .appendQueryParameter(FORMAT_PARAM, format)
                         .appendQueryParameter(UNITS_PARAM, units)
                         .appendQueryParameter(DAYS_PARAM, Integer.toString(numDays))
+                        .appendQueryParameter(API_KEY, api_key)
                         .build();
 
                 //below is an optional way found on stackoverflow for how to create a uri builder
@@ -199,7 +223,7 @@ public class ForecastFragment extends Fragment {
                 // Construct the URL for the OpenWeatherMap query
                 // Possible parameters are avaiable at OWM's forecast API page, at
                 // http://openweathermap.org/API#forecast
-               //OLD: URL url = new URL("http://api.openweathermap.org/data/2.5/forecast/daily?q=94043&mode=json&units=metric&cnt=7");
+                //OLD: URL url = new URL("http://api.openweathermap.org/data/2.5/forecast/daily?q=94043&mode=json&units=metric&cnt=7");
                 URL url = new URL(weekForecastURL);
 
                 // Create the request to OpenWeatherMap, and open the connection
@@ -235,7 +259,7 @@ public class ForecastFragment extends Fragment {
 
 
             } catch (IOException e) {
-                Log.e(LOG_TAG, "Error ", e);
+                Log.e(LOG_TAG, "HTTP Error " + e.getMessage(), e);
                 // If the code didn't successfully get the weather data, there's no point in attemping
                 // to parse it.
                 return null;
@@ -254,7 +278,7 @@ public class ForecastFragment extends Fragment {
 
 
             try {
-                 return getWeatherDataFromJson(forecastJsonStr,numDays);
+                return getWeatherDataFromJson(forecastJsonStr,numDays);
             } catch (JSONException e) {
                 Log.e(LOG_TAG,e.getMessage(), e);
                 e.printStackTrace();

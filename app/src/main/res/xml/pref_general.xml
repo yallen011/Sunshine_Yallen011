@@ -20,5 +20,6 @@
         android:defaultValue="@string/pref_units_default_value"
         android:entries="@array/pref_units_titles"
         android:entryValues="@array/pref_units_list_values" />
+>>>>>>> 1.01_hello_world
 
 </PreferenceScreen>
